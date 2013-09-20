@@ -56,7 +56,7 @@ id delegate = [UIApplication sharedApplication].delegate;
 
 **Not:**
 ```objc
-[view setBackgroundColor:[UIColor orangeColor]];
+view.backgroundColor = [UIColor orangeColor];
 UIApplication.sharedApplication.delegate;
 ```
 
