@@ -22,19 +22,18 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Error handling](#error-handling)
 * [Methods](#methods)
 * [Variables](#variables)
-* [Naming](#naming)
-  * [Underscores](#underscores)
-* [Comments](#comments)
-* [Init & Dealloc](#init-and-dealloc)
-* [Literals](#literals)
-* [CGRect Functions](#cgrect-functions)
-* [Constants](#constants)
-* [Enumerated Types](#enumerated-types)
-* [Private Properties](#private-properties)
 * [Image Naming](#image-naming)
 * [Booleans](#booleans)
 * [Singletons](#singletons)
 * [Xcode Project](#xcode-project)
+* [Categories](#categories)
+* [Creating Header files](#creating-header-files)
+* [Pre-processor directives and Constants](#pre-processor-directives-and-constants)
+* [Strings](#strings)
+* [DRY Principle](#dry-principle)
+* [Keep The Code Simple](#keep-the-code-simple)
+* [Commenting](#commenting)
+* [Other conventions and good practices](#other-conventions-and-good-practices)
 
 ## Dot-Notation Syntax
 
@@ -145,6 +144,13 @@ In method signatures, there should be a space after the scope (-/+ symbol). Ther
 ```objc
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
+
+Methods should be named using the following format: Verb + Adjective(s) + Noun + Qualifier(s)
+
+Use this format for naming routines that perform some operation on a given object, such as `calculateInvoiceTotal {}`. When naming methods, include a description of the value being returned, such as `getCurrentWindowName {}`
+
+Avoid large methods. As a method’s body approaches 20 to 30 lines of code, look for blocks that could be split into their own methods and possibly shared by other methods
+
 ## Variables
 
 Variables should be named as descriptively as possible. Single letter variable names should be avoided except in `for()` loops.
@@ -293,12 +299,6 @@ This is because if the file has been expanded already, it will not expand it aga
 2. Use #define only when something has to be decided at compile time.
 
 3. Use Uppercase to name constants or #define.
-
-## Methods
-
-Use this format for naming routines that perform some operation on a given object, such as `calculateInvoiceTotal{}`. When naming methods, include a description of the value being returned, such as `getCurrentWindowName{}`
-
-Avoid large methods. As a method’s body approaches 20 to 30 lines of code, look for blocks that could be split into their own methods and possibly shared by other methods
 
 ## Strings
 
