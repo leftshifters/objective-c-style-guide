@@ -181,7 +181,7 @@ Images that are used for a similar purpose should be grouped in respective group
 
 ## Booleans
 
-Boolean variable names should be prefixed or should contain identifiers like `is`,``has`,`did`,etc which implies `Yes`/`No` or `True`/`False` values, such as `fileIsFound`.
+Boolean variable names should be prefixed or should contain identifiers like `is`,`has`,`did`,etc which implies `Yes`/`No` or `True`/`False` values, such as `fileIsFound`.
 
 Use a positive connotation for boolean variable names (e.g. `isOpen` as opposed to `notOpen`).
 
@@ -328,21 +328,22 @@ The code that a programmer writes should be simple. Complicated logic for achiev
 
 - Do not write comments for every line of code and every variable declared.
 - Write comments wherever required. Good, readable code requires fewer comments. If all variables and method names are meaningful, that would make the code very readable and will not need many comments. 
-- The bottom line is, write clean, readable code such a way that it doesn't need any comments to understand.
-- Use complete sentences when writing comments. Comments should clarify the code, not add ambiguity.
 - Do not write comments if the code is easily understandable without comment. The drawback of having lot of comments is that if you change the code and forget to change the comment, it will lead to more confusion.
+- The bottom line is, write clean, readable code such a way that it doesn't need any comments to understand.
+
+- Use complete sentences when writing comments. Comments should clarify the code, not add ambiguity.
 - If you have to use some complex or weird logic for any reason, document it very well with sufficient comments.
 
 - At the beginning of every routine, it is helpful to provide standard, boilerplate comments, indicating the routine's purpose, assumptions, and limitations. A boilerplate comment should be a brief introduction that explains why it exists and what it can do.
 Each major routine should have a header that identifies:
-	1. what it is supposed to do
-	2. what the parameters mean (both input and output)
-	3. what it returns (if it's a function)
-	4. any known limitations
+1. what it is supposed to do
+2. what the parameters mean (both input and output)
+3. what it returns (if it's a function)
+4. any known limitations
 
-- Mark incomplete code with ‘TODO: comments. When working with many classes at once, it can be very easy to lose a train of thought.
+- Mark incomplete code with `TODO:` comments. When working with many classes at once, it can be very easy to lose a train of thought.
 
-## Other conventions
+## Other conventions and good practices
 
 Do not use logical operators on object types:
 
@@ -439,6 +440,8 @@ else
 // fail and will not be noticed.
 }
 ```
+
+Avoid using member variables. Declare local variables wherever necessary and pass it to other methods instead of sharing a member variable between methods. If you share a member variable between methods, it will be difficult to track which method changed the value and when.
 
 Never hardcode a path or drive name in code. Get the application path programmatically and use relative path.
 
