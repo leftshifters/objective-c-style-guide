@@ -151,7 +151,12 @@ Variables should be named as descriptively as possible. Single letter variable n
 
 Asterisks indicating pointers belong with the variable, e.g., `NSString *text` not `NSString* text` or `NSString * text`, except in the case of constants.
 
+Do not use underscores (_) for local variable names.
+
+Use Meaningful, descriptive words to name variables. Do not use abbreviations.
+
 Property definitions should be used in place of naked instance variables whenever possible. Direct instance variable access should be avoided except in initializer methods (`init`, `initWithCoder:`, etc…), `dealloc` methods and within custom setters and getters. For more information on using Accessor Methods in Initializer Methods and dealloc, see [here](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/ADBannerView *googleAdView;
+```objc
 @property (nonatomic, strong) ADBannerView *iAdView;
 @property (nonatomic, strong) UIWebView *adXWebView;
 
@@ -264,6 +269,79 @@ All category methods must have a prefix. This is to avoid conflicts when a metho
 + (UIButton *)bigRedButton;
 ```
 
+## Creating Header files
+
+Always have the following code in the header file.
+
+**For Example: creating a class named BaseViewController**
+
+```objc
+#ifndef BASE_VIEW_CONTROLLER
+#define BASE_VIEW_CONTROLLER
+
+//Interface and Declaration goes here...
+
+#endif
+```
+
+This is because if the file has been expanded already, it will not expand it again!
+
+## Pre-processor directives and Constants
+
+1. Do not use #define for constants. Use `const` instead.
+
+2. Use #define only when something has to be decided at compile time.
+
+3. Use Uppercase to name constants or #define.
+
+## Methods
+
+Use this format for naming routines that perform some operation on a given object, such as `calculateInvoiceTotal{}`. When naming methods, include a description of the value being returned, such as `getCurrentWindowName{}`
+
+Avoid large methods. As a method’s body approaches 20 to 30 lines of code, look for blocks that could be split into their own methods and possibly shared by other methods
+
+## Strings
+
+Avoid hardcoding Strings, use resource files instead or place them in a separate file defining them as constants.
+
+- If your application supports multiple languages, then using resource files is a good idea. It makes it vastly easier to localize your application for different languages. If you want to be able to run it
+in French, just give the string resources to a translator and they'll give you back a French translation.
+
+- Hard-coded strings could be duplicated across your code and are much more difficult to "find and replace". Hence, you are prone to errors and using resource files is better option then.
+
+## DRY Principle
+
+1. DRY stands for Don’t Repeat Yourself.
+
+2. The Principle states:- 
+“Every single piece of knowledge must have a single, unambiguous and authoritative representation within a system.”
+
+3. The purpose for most applications (or computers in general) is to automate repetitive tasks. This principle should be maintained in all code. The same piece of code should not be repeated over and over again.
+
+4. If you find yourself using the same block of code more than once, it’s a good candidate for a separate method.
+
+## Keep The Code Simple
+
+The code that a programmer writes should be simple. Complicated logic for achieving a simple thing should be kept to a minimum since the code might be modified by another programmer in the future. The logic one programmer implemented may not make perfect sense to another. So, always keep the code as simple as possible.
+
+## Commenting
+
+- Do not write comments for every line of code and every variable declared.
+- Write comments wherever required. Good, readable code requires fewer comments. If all variables and method names are meaningful, that would make the code very readable and will not need many comments. 
+- The bottom line is, write clean, readable code such a way that it doesn't need any comments to understand.
+- Use complete sentences when writing comments. Comments should clarify the code, not add ambiguity.
+- Do not write comments if the code is easily understandable without comment. The drawback of having lot of comments is that if you change the code and forget to change the comment, it will lead to more confusion.
+- If you have to use some complex or weird logic for any reason, document it very well with sufficient comments.
+
+- At the beginning of every routine, it is helpful to provide standard, boilerplate comments, indicating the routine's purpose, assumptions, and limitations. A boilerplate comment should be a brief introduction that explains why it exists and what it can do.
+Each major routine should have a header that identifies:
+	1. what it is supposed to do
+	2. what the parameters mean (both input and output)
+	3. what it returns (if it's a function)
+	4. any known limitations
+
+- Mark incomplete code with ‘TODO: comments. When working with many classes at once, it can be very easy to lose a train of thought.
+
 ## Other conventions
 
 Do not use logical operators on object types:
@@ -287,7 +365,7 @@ Declare variables as close as possible to where it is first used.
 
 Avoid Deep Nesting. Too many levels of nesting can make code harder to read and follow.
 
-Limit Line Length. Our eyes are more comfortable when reading tall and narrow columns of text. This is precisely the reason why newspaper articles look like this. For this reason use one variable declaration per line.
+Limit Line Length. Our eyes are more comfortable when reading tall and narrow columns of text. This is precisely the reason why newspaper articles look like the way they are. For this reason use one variable declaration per line.
 Also in methods/procedures/functions, try using one or two parameter declaration per line. The basic idea is to avoid left-right scrolling.
  
 **For Ex:**
@@ -297,16 +375,20 @@ NSNumber *redBallsCount;
 NSNumber *blueBallsCount;
 NSNumber *greenBallsCount;
 
-initWithBitmapDataPlanes:
-		pixelsWide:
-		pixelsHigh:
-		bitsPerSample:
-		samplesPerPixel:
-		hasAlpha:
-		isPlanar:
-		colorSpaceName:
-		bitmapFormat:
-		bytesPerRow:bitsPerPixel:
+- (id)initWithBitmapDataPlanes:(unsigned char **)planes 
+					pixelsWide:(NSInteger)width 
+					pixelsHigh:(NSInteger)height 
+					bitsPerSample:(NSInteger)bps 
+					samplesPerPixel:(NSInteger)spp 
+					hasAlpha:(BOOL)alpha 
+					isPlanar:(BOOL)isPlanar 
+					colorSpaceName:(NSString *)colorSpaceName 
+					bitmapFormat:(NSBitmapFormat)bitmapFormat 
+					bytesPerRow:(NSInteger)rowBytes 
+					bitsPerPixel:(NSInteger)pixelBits {
+						
+	//code goes here...					
+}
 ```
 
 **Not**
@@ -315,7 +397,10 @@ initWithBitmapDataPlanes:
 
 NSNumber *redBallsCount, *blueBallsCount, *greenBallsCount;
 
-initWithBitmapDataPlanes:pixelsWide:pixelsHigh:bitsPerSample:samplesPerPixel:hasAlpha:isPlanar:colorSpaceName:bitmapFormat:bytesPerRow:bitsPerPixel:
+- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(NSInteger)rowBytes bitsPerPixel:(NSInteger)pixelBits {
+	
+	//code...
+}
 ```
 
 Always watch for unexpected values. For example, if you are using a parameter with 2 possible values, never assume that if one is not matching then the only possibility is the other value. 
@@ -364,82 +449,6 @@ Avoid public methods and properties, unless they really need to be accessed from
 Avoid passing too many parameters to a method. If you have more than 4~5 parameters, it is a good candidate to define a class.
 
 If you have a method returning a collection, return an empty collection instead of null, if you have no data to return. For example, if you have a method returning an ArrayList, always return a valid `arrayList`. If you have no items to return, then return a valid `arrayList` with 0 items. This will make it easy for the calling application to just check for the `arrayList.count` rather than doing an additional check for `nil`.
-
-
-
-## Creating Header files
-
-Always have the following code in the header file.
-
-**For Example: creating a class named BaseViewController
-
-```objc
-#ifndef BASE_VIEW_CONTROLLER
-#define BASE_VIEW_CONTROLLER
-
-//Interface and Declaration goes here...
-
-#endif
-```
-
-This is because if the file has been expanded already, it will not expand it again!
-
-## Pre-processor directives and Constants
-
-1. Do not use #define for constants. Use `const` instead.
-
-2. Use #define only when something has to be decided at compile time.
-
-3. Use Uppercase to name constants or #define.
-
-## Methods
-
-Use this format for naming routines that perform some operation on a given object, such as `calculateInvoiceTotal{}`. When naming methods, include a description of the value being returned, such as `getCurrentWindowName{}`
-
-Avoid large methods. As a method’s body approaches 20 to 30 lines of code, look for blocks that could be split into their own methods and possibly shared by other methods
-
-## Strings
-
-Avoid hardcoding Strings, use resource files instead or place them in a seperate file.
-- If your application supports multiple languages, then using resource files is a good idea. It makes it vastly easier to localize your application for different languages. If you want to be able to run it in French, just give the string
-resources to a translator and they'll give you back a French translation.
-- Hard-coded strings could be duplicated across your code and are much more difficult to "find and replace". Hence, you are prone to errors and using resource files is better option then.
-
-## DRY Principle
-
-1. DRY stands for Don’t Repeat Yourself.
-
-2. The Principle states:- 
-“Every single piece of knowledge must have a single, unambiguous and authoritative representation within a system.”
-
-3.The purpose for most applications (or computers in general) is to automate repetitive tasks. This principle should be maintained in all code. The same piece of code should not be repeated over and over again.
-
-4. If you find yourself using the same block of code more than once, it’s a good candidate for a separate method.
-
-## Keep The Code Simple
-
-The code that a programmer writes should be simple. Complicated logic for achieving a simple thing should be kept to a minimum since the code might be modified by another programmer in the future. The logic one programmer implemented may not make perfect sense to another. So, always keep the code as simple as possible.
-
-## Commenting
-
-
-Do not write comments for every line of code and every variable declared.
-Write comments wherever required. Good, readable code requires fewer comments. If all variables and method names are meaningful, that would make the code very readable and will not need many comments. The bottom line is, write clean, readable code such a way that it doesn't need any comments to understand.
-
-Use complete sentences when writing comments. Comments should clarify the code, not add ambiguity.
-
-Do not write comments if the code is easily understandable without comment. The drawback of having lot of comments is that if you change the code and forget to change the comment, it will lead to more confusion.
-
-If you have to use some complex or weird logic for any reason, document it very well with sufficient comments.
-
-At the beginning of every routine, it is helpful to provide standard, boilerplate comments, indicating the routine's purpose, assumptions, and limitations. A boilerplate comment should be a brief introduction that explains why it exists and what it can do.
-Each major routine should have a header that identifies:
-o	what it is supposed to do
-o	what the parameters mean (both input and output)
-o	what it returns (if it's a function)
-o	any known limitations
-
-Mark incomplete code with ‘TODO: comments. When working with many classes at once, it can be very easy to lose a train of thought.
 
 # Other Objective-C Style Guides
 
