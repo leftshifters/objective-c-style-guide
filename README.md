@@ -336,10 +336,26 @@ The code that a programmer writes should be simple. Complicated logic for achiev
 
 - At the beginning of every routine, it is helpful to provide standard, boilerplate comments, indicating the routine's purpose, assumptions, and limitations. A boilerplate comment should be a brief introduction that explains why it exists and what it can do.
 Each major routine should have a header that identifies:
-1. what it is supposed to do
-2. what the parameters mean (both input and output)
-3. what it returns (if it's a function)
-4. any known limitations
+	1. what it is supposed to do
+	2. what the parameters mean (both input and output)
+	3. what it returns (if it's a function)
+	4. any known limitations
+
+**For Ex:**
+
+```objc
+/*! 
+    @method requestWithURL:
+    @abstract Allocates and initializes an NSURLRequest with the given
+    URL.
+    @discussion Default values are used for cache policy
+    (NSURLRequestUseProtocolCachePolicy) and timeout interval (60
+    seconds).
+    @param URL The URL for the request.
+    @result A newly-created and autoreleased NSURLRequest instance.
+*/
++ (id)requestWithURL:(NSURL *)URL;
+```
 
 - Mark incomplete code with `TODO:` comments. When working with many classes at once, it can be very easy to lose a train of thought.
 
